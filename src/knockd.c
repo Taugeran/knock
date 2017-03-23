@@ -73,6 +73,7 @@ static char version[] = "0.8.0";
 #define SEQ_TIMEOUT		25 /* default knock timeout in seconds */
 #define CMD_TIMEOUT		10 /* default timeout in seconds between start and stop commands */
 #define SEQ_MAX			32 /* maximum number of ports in a knock sequence */
+#define	ACL_MAX_ENTRIES 512/* maximum number of IPs in a door ACL, equiv to 2 /24 CIDR blocks [incl Network ID and Broadcasts]*/
 
 typedef enum _flag_stat {
 	DONT_CARE,  /* 0 */

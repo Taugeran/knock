@@ -1,0 +1,23 @@
+You can specify IP addresses/prefixes that are allowed to use a particular	
+knock sequence as either:
+	 1) a single IP [192.168.123.234], which implies a CIDR mask of /32
+
+	 2) a CIDR format netblock e.g. 10.12.23.0/24, which is expanded into a list
+
+
+Each door has an ACL
+
+
+Example:
+
+	[acltest]
+		acl 		= 192.168.0.100,10.0.0.0/24
+		sequence    = 7001,8001,9001,10001
+		seq_timeout = 5
+		command     = /usr/sbin/iptables -A INPUT -s %IP% -p tcp --dport 22 -j ACCEPT
+		tcpflags    = syn
+
+
+Code refs:
+http://www.unix.com/programming/118858-how-parse-ip-range-cidr-format-c.html
+http://www.cs.colostate.edu/~somlo/iprange.c
