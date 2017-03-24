@@ -892,6 +892,14 @@ long get_current_one_time_sequence_position(opendoor_t *door)
  * door->pcap_filter_exp is NULL. This behaviour can be used for doors with one
  * time sequences, where the subfilter has to be generated after each sequence.
  */
+
+/*
+ * 
+ * TODO: Break this monster 200+ line func into more modular blocks.
+ *
+ * TODO: Rewrite the netfilter so that each door is a distinct block inside closed 
+ *		 parentheses.
+ */
 void generate_pcap_filter()
 {
 	PMList *lp;
@@ -1118,6 +1126,51 @@ void generate_pcap_filter()
 		free(buffer);
 	}
 }
+
+/*
+ *
+ * pcap filter rewrite primitives & ACL function prototypes
+ *
+ */
+void parse_options(){}
+
+void parse_door(){}
+void parse_door_ip_acl(){}
+void parse_door_port_sequence(){}
+void parse_door_timeout(){}
+void parse_door_tcp_flags(){}
+void parse_door_cmd(){}
+
+
+void generate_door_ip_acl_filter(){}
+void generate_door_ip_acl_host(){}
+void generate_door_ip_acl_netblock(){}
+void generate_door_port_sequence_filter(){}
+
+/*
+
+typedef struct opendoor {
+	char name[128];
+	unsigned short seqcount;
+	unsigned short sequence[SEQ_MAX];
+	unsigned short protocol[SEQ_MAX];
+	char *target;
+	time_t seq_timeout;
+	char *start_command;
+	time_t cmd_timeout;
+	char *stop_command;
+	flag_stat flag_fin;
+	flag_stat flag_syn;
+	flag_stat flag_rst;
+	flag_stat flag_psh;
+	flag_stat flag_ack;
+	flag_stat flag_urg;
+	FILE *one_time_sequences_fd;
+	char *pcap_filter_exp;
+} opendoor_t;
+
+*/
+
 
 /* Reallocating strcat -- appends the src string to the dest string (pointer to
  * char*!) overwriting the `\0' character at the end of dest, and then adds a
