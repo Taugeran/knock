@@ -1137,9 +1137,13 @@ void parse_options(){}
 void parse_door(){}
 void parse_door_ip_acl(){}
 void parse_door_port_sequence(){}
-void parse_door_timeout(){}
+void parse_door_sequence_timeout(){}
 void parse_door_tcp_flags(){}
 void parse_door_cmd(){}
+void parse_door_start_cmd(){}
+void parse_door_cmd_timeout(){}
+void parse_door_stop_cmd(){}
+void __parse_otp_file(){}
 
 
 void generate_door_ip_acl_filter(){}
@@ -1147,7 +1151,7 @@ void generate_door_ip_acl_host(){}
 void generate_door_ip_acl_netblock(){}
 void generate_door_port_sequence_filter(){}
 
-/*
+/* convenient copy of opendoor for reference
 
 typedef struct opendoor {
 	char name[128];
