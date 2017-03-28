@@ -7,7 +7,8 @@ knock sequence as either:
 
 Each door's ACL is a comma separated list which at runtime, when present, is compiled 
 into a set of src host and src net statements that is prepended to the door knock
-sequence. This is to ensure tha
+sequence. This is to ensure that the door IP ACL is implemented as close to hardware 
+as possible to minimize impact and unnecessary code execution.
 
 
 Example:
@@ -18,9 +19,6 @@ Example:
 		seq_timeout = 5
 		command     = /usr/sbin/iptables -A INPUT -s %IP% -p tcp --dport 22 -j ACCEPT
 		tcpflags    = syn
-
-
-
 
 
 * Example filter for two doors with sequences 8000:tcp,4000:udp,8001:tcp,4001:udp,8002:tcp (syn) and

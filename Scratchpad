@@ -1,0 +1,23 @@
+filter:
+((destination block) and (door blocks))
+
+destination block:
+(dst host IP or IP or IP)
+
+door block:
+((IP ACL block) and (sequence block))
+
+IP ACL:
+(src host or net or host or net)
+
+sequence block:
+((TCP block) or (UDP block))
+
+TCP block:
+(tcp dst port ##### or ##### and (TCP flag logic))
+
+TCP flag logic:
+(tcp[tcpflags] & [flags] != 0)
+
+UDP block:
+(udp dst port ##### or #####)

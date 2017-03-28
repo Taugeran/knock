@@ -73,7 +73,7 @@ static char version[] = "0.8.0";
 #define SEQ_TIMEOUT		25 /* default knock timeout in seconds */
 #define CMD_TIMEOUT		10 /* default timeout in seconds between start and stop commands */
 #define SEQ_MAX			32 /* maximum number of ports in a knock sequence */
-#define	ACL_MAX_ENTRIES 512/* maximum number of IPs in a door ACL, equiv to 2 /24 CIDR blocks [incl Network ID and Broadcasts]*/
+#define	ACL_MAX_ENTRIES 64/* 512 Byte maximum per door*/
 
 typedef enum _flag_stat {
 	DONT_CARE,  /* 0 */
@@ -81,12 +81,19 @@ typedef enum _flag_stat {
 	NOT_SET     /* 2 */
 } flag_stat;
 
+typedef struct acl_entry {
+	uint32_t ip;
+	uint32_t netmask; 
+
+} acl_entry_t;
+
 //
 // TO-DO: Add the singular open door port struct to this struct
 //
 /* knock/event tuples */
 typedef struct opendoor {
 	char name[128];
+	acl_entry_t acl[ACL_MAX_ENTRIES];
 	unsigned short seqcount;
 	unsigned short sequence[SEQ_MAX];
 	unsigned short protocol[SEQ_MAX];
@@ -1145,7 +1152,8 @@ void parse_door_cmd_timeout(){}
 void parse_door_stop_cmd(){}
 void __parse_otp_file(){}
 
-
+void __generate_pcap_filter(){}
+void generate_door_filter(){}
 void generate_door_ip_acl_filter(){}
 void generate_door_ip_acl_host(){}
 void generate_door_ip_acl_netblock(){}
