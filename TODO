@@ -4,3 +4,6 @@
   - the knock sequence itself could define the port to open
   - the knock sequence could be tied to predictable variables
 		- date: hour of the day, day of the month, year, etc
+
+add option to compile and save the bpf [for the curious], as well 
+as an MD5 startup check to see if config file has changed. possible startup speed enhancement

@@ -83,7 +83,7 @@ typedef enum _flag_stat {
 
 typedef struct acl_entry {
 	uint32_t ip;
-	uint32_t netmask; 
+	uint32_t netmask;
 
 } acl_entry_t;
 
@@ -901,10 +901,10 @@ long get_current_one_time_sequence_position(opendoor_t *door)
  */
 
 /*
- * 
+ *
  * TODO: Break this monster 200+ line func into more modular blocks.
  *
- * TODO: Rewrite the netfilter so that each door is a distinct block inside closed 
+ * TODO: Rewrite the netfilter so that each door is a distinct block inside closed
  *		 parentheses.
  */
 void generate_pcap_filter()
@@ -1152,17 +1152,53 @@ void parse_door_cmd_timeout(){}
 void parse_door_stop_cmd(){}
 void __parse_otp_file(){}
 
-void __generate_pcap_filter(){}
-void generate_door_filter(){}
-void generate_door_ip_acl_filter(){}
-void generate_door_ip_acl_host(){}
-void generate_door_ip_acl_netblock(){}
-void generate_door_port_sequence_filter(){}
+void __generate_pcap_filter()
+{
+
+}
+/* Stores the generated door filter into door->pcap_filter_exp */
+void generate_door_filter(opendoor_t *door)
+{
+
+}
+
+/* Returns a parentheses enclosed string containing the ACL */
+char* generate_door_ip_acl_filter(acl_entry_t entries[ACL_MAX_ENTRIES])
+{
+
+}
+
+/* Returns a string containing an ACL host statement */
+char* generate_door_ip_acl_host(acl_entry_t entry)
+{
+	char out[25];
+	char template[]="host %s";
+	uint32_t n;
+	//n = sprintf(out, template, inet_ntoa());
+}
+
+/* Returns a string containing an ACL network statement */
+char* generate_door_ip_acl_netblock(acl_entry_t entry)
+{
+
+}
+
+/* Returns a parentheses enclosed string containing the door knock sequence */
+char* generate_door_port_sequence_filter(opendoor_t *door)
+{
+
+}
 
 /* convenient copy of opendoor for reference
 
+typedef struct acl_entry {
+	uint32_t ip;
+	uint32_t netmask;
+} acl_entry_t;
+
 typedef struct opendoor {
 	char name[128];
+	acl_entry_t acl[ACL_MAX_ENTRIES];
 	unsigned short seqcount;
 	unsigned short sequence[SEQ_MAX];
 	unsigned short protocol[SEQ_MAX];
