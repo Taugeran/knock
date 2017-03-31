@@ -22,3 +22,4 @@
 /stamp-h1
 
 src/cidr2range
+bin.testing/*
