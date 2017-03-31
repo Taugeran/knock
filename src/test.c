@@ -68,10 +68,30 @@ char *generate_door_ip_acl_netblock( acl_entry_t entry )
 {
   char *out = malloc( sizeof( char ) * 30 ) ;
   char template[] = "net %s/%s" ;
-  int32_t n ;
+  uint32_t n = entry.netmask ;
+  uint32_t cidr = 0;
+
   struct in_addr _netid = { .s_addr = entry.ip } ;
-  struct in_addr _mask = { .s_addr = entry.netmask } ;
+  //struct in_addr _mask = { .s_addr = entry.netmask } ;
+
+
+  while ( n )
+  {
+    cidr += ( n & 0x01 );
+    n >>= 1;
+  }
+
+  printf("%lu bit mask\n", (unsigned long)cidr );
+
+
+  return out;
 }
+
+
+
+
+
+
 
 int main( int argc, char const *argv[] ) {
   char *_ip_ = "192.168.100.4" ;
@@ -88,9 +108,11 @@ int main( int argc, char const *argv[] ) {
 
   out = generate_door_ip_acl_host( test ) ;
 
-printf("%s\n", );
+//printf("%s\n", );
 
-  printf("'%s'\n", out );
+  printf("'%s'\n", out ) ;
+
+  out = generate_door_ip_acl_netblock( test ) ;
 
   return 0 ;
 }
